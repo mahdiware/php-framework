@@ -12,7 +12,7 @@ class Session
 	
 	public function has(string $name)
 	{
-		
+		return isset($_SESSION[$name]);
 	}
 	
 	public function remove(string $name)
@@ -20,8 +20,8 @@ class Session
 		
 	}
 	
-	public function set(string $name)
+	public function set(string $name, $value)
 	{
-		
+		return $_SESSION[$name] = $value;
 	}
 }
