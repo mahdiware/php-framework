@@ -1,5 +1,6 @@
 namespace Mahdiware\Session;
 
+
 //This file has not been completed, please do not use it 
 class Session
 {
