@@ -22,6 +22,7 @@ On the front we see three items <br>
 <br><br>
 If I take it to the Home located at `Application/Controllers/Home.php`
 We see it like this 
+
 ```php
 class Home extends Controller {
 
