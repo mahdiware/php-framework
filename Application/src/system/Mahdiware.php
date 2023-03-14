@@ -6,7 +6,7 @@ use Application\Controllers\Routes as Router;
 use Mahdiware\Routes;
 
 class Mahdiware {
-	public const VERSION = '4.1';
+	public const VERSION = '4.2';
     private $ErrorPage; //ErrorPage
     private $Routes;
     private $data;
