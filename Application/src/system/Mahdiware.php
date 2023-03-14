@@ -18,7 +18,7 @@ class Mahdiware {
         $this->Routes = new Routes();
         $Router = new Router($this);
     }
-    
+    //fetching ErrorPage class
     function getErrorPage() {
         return $this->ErrorPage;
     }
@@ -37,8 +37,8 @@ class Mahdiware {
     function run() {
         $array_action = [];
         $direction; $type; $_type;
+        //getting all parameter e.g: http://example.com/?load=name
         $src = input_encode(filter_input(INPUT_GET, 'load'));
-        
         
         $this->action = $this->getRequestUri();
         if($this->action == "/"){
@@ -46,7 +46,7 @@ class Mahdiware {
         }
         
         foreach($this->Routes->get() as $name => $data){
-        		$array_action[] = $data["name"];
+        	$array_action[] = $data["name"];
             
             if($this->action == $data["name"]){
                 $direction = explode("::", str_replace(" " , "", $data["direction"]));
@@ -59,7 +59,7 @@ class Mahdiware {
         }else{
         	$_type = "GET";
         }
-        
+        //in Storage Folder
         if(empty($src)){
 			if(in_array($this->action, $array_action) && ($_type == $type || $type == "BOTH") && empty($src)){
                 
