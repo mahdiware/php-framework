@@ -1,6 +1,6 @@
 <h3>Version</h2>
 
-framework version `4.1` and aso I was using php version `7.4.0` when writing
+framework version `4.2` and aso I was using php version `7.4.0` when writing
 
 <h3>front page</h2>
 
