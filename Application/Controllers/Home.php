@@ -15,9 +15,9 @@ class Home extends Controller {
         	"title" => "Welcome To Mahdiware",
         ];
         $this->view("index", $content);
-        /*
-        	you can test in library function!
-   	 	  	echo TestLib::Test();
-    	*/
+        
+        #	you can test in library function!
+   	 	# 	echo TestLib::Test();
+    	
     }
 }
