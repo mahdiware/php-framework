@@ -15,5 +15,6 @@ class Example extends Controller {
         	"title" => "Welcome To Mahdiware",
         ];
         $this->view("--Name--", $content);
+        //Design it yourself
     }
 }
