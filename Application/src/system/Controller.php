@@ -5,12 +5,10 @@ use Application\Config\Os;
     abstract class Controller {
         var $layout;
         var $activity;
-        var $params;
         var $View;
         
         public function __construct($activity) {
             $this->activity = $activity;
-            $this->params['activity'] = $activity;
             $this->View = new View();
         }
 
@@ -51,7 +49,6 @@ use Application\Config\Os;
         }
 
         function view($view, $getData = []) {
-            $params = $this->params;
             $activity = $this->activity;
             
             foreach($getData as $name => $data)
