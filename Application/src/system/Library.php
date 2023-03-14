@@ -1,14 +1,15 @@
 <?php
+//Application Folder Path
 define('Application', PATH . DIRECTORY_SEPARATOR . "Application");
-
+//System Folder Path
 define('System', Application . DIRECTORY_SEPARATOR . "src/system");
-
+//writable Folder Path
 define('writable', Application . DIRECTORY_SEPARATOR . "src/writable");
-
+//Storage Folder Path
 define('Storage', PATH . DIRECTORY_SEPARATOR . "Storage");
-
+//Views Folder Path
 define('Views', Application . DIRECTORY_SEPARATOR . "Views");
-
+//Controller Folder Path
 define('Controller', Application . DIRECTORY_SEPARATOR . "Controllers");
 
 
