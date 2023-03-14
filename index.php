@@ -15,6 +15,7 @@ chdir(PATH);
 require PATH . DIRECTORY_SEPARATOR . 'Application/Config/Os.php';
 require rtrim((new Os)->SystemPath, '\\/ ') . '/autoload.php';
 
-
+//env class
 (new Env(PATH . DIRECTORY_SEPARATOR . 'Application/'))->load();
+//Head of framework
 (new Mahdiware())->run();
