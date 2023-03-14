@@ -8,7 +8,6 @@ class Routes extends Router {
         #####################
         
         $this->set("BOTH","/","Home::Index");
-        
         $this->set("BOTH","a/b/c","Home::Index");
         //POST    -> can only be seen by the person who enter post request on the page 
         //GET     -> can be seen other request only POST
