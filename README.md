@@ -18,9 +18,8 @@ On the front we see three items <br>
     * when it is BOTH:- you can see only the requests<br>
 2. a/b/c -> is name of the page, the  The client will not write the .php at the end because it is unnecessary <br><br>
 3. Home::Index -> where home is run from the class in the `Application/Controllers/Home.php` folder and also Index is a function in the Home 
-<br><br>
-If I take it to the Home located at `Application/Controllers/Home.php`
-We see it like this 
+<br><br>If I take it to the Home located at `Application/Controllers/Home.php`
+We see it like this
 
 ```php
 class Home extends Controller {
