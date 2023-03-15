@@ -16,7 +16,6 @@ abstract class Router {
      
     function get(){
         return $this->activity->getRoutes()->get();
-    } 
-
+    }
 
 }
