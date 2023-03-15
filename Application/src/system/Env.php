@@ -10,13 +10,13 @@ class Env
     {
         $this->path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
     }
-
+	
     public function load(): bool
     {
     	$vars = $this->parse();
         return $vars !== null;
     }
-
+	
     public function parse(): ?array
     {
         if (! is_file($this->path)) {
@@ -41,7 +41,7 @@ class Env
         }
         return $vars;
     }
-
+	
     protected function setVariable(string $name, string $value = '')
     {
         if (! getenv($name, true)) {
@@ -54,7 +54,7 @@ class Env
             $_SERVER[$name] = $value;
         }
     }
-
+	
     public function normaliseVariable(string $name, string $value = ''): array
     {
         // Split our compound string into its parts.
@@ -71,7 +71,7 @@ class Env
 
         return [$name, $value];
     }
-
+	
     protected function sanitizeValue(string $value): string
     {
         if (! $value) {
@@ -106,7 +106,7 @@ class Env
         }
         return $value;
     }
-
+	
     protected function resolveNestedVariables(string $value): string
     {
         if (strpos($value, '$') !== false) {
@@ -124,7 +124,8 @@ class Env
         }
         return $value;
     }
-
+	
+	//return true or false
     protected function getVariable(string $name)
     {
         switch (true) {
