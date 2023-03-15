@@ -45,7 +45,6 @@ $this->view("index", $content);
 where index is the file located at `Application/Views/index.php`
 
 
-
 when you go you see 
 ```php
 <?= $this->extend('layouts/layout') ?>
