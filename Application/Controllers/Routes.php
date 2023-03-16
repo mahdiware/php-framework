@@ -12,5 +12,5 @@ class Routes extends Router {
         //POST    -> can only be seen by the person who enter post request on the page 
         //GET     -> can be seen other request only POST
         //BOTH   -> can be seen all request
-    }  
+    }
 }
