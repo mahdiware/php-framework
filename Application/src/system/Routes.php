@@ -12,10 +12,10 @@ class Routes
             'name' => $name,
             'direction' => $direction,
         ];
-        $this->$Routes[] = $data ;
+        $this->Routes[] = $data ;
     }
     public function get(){
     
-        return $this->$Routes;
+        return $this->Routes;
     }    
 }
