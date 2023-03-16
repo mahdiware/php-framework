@@ -1,16 +1,17 @@
 <?php
 namespace Mahdiware;
+use mysqli;
 
 class Database
 {
-	private mysqli;
+	private $mysqli;
 	
-	public class __construct()
+	public function __construct()
 	{
 		$this->mysqli = new mysqli(env("database.hostname", "localhost"), env("database.username", "root"), env("database.password", "root"), env("database.name", "mahdiware"));
 	}
 	
-	public class mysql()
+	public function mysql()
 	{
 		return $this->mysqli;
 	}
