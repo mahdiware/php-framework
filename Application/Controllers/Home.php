@@ -10,7 +10,9 @@ class Home extends Controller {
         parent::__construct($activity);
     }
 
-    function Index() {           
+    function Index() { 
+    	//var_dump(mysql());
+    	
         $content = [
         	"title" => "Welcome To Mahdiware",
         ];
