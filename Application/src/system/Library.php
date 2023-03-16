@@ -34,6 +34,38 @@ if (! function_exists('env')) {
         return $value;
     }
 }
+
+function exceptionHandler($exception){
+	$errorMessage = $exception->getMessage();
+    $errorLine = $exception->getLine();
+    $errorTrace = $exception->getTraceAsString();
+    $errorCode = $exception->getCode();
+    $errorFile = $exception->getFile();
+    $errorDetails = $exception->__toString();
+    
+    $getError = "errorException: $errorMessage at File: $errorFile in Line: $errorLine\n\n";
+	ob_start();
+    include Views . '/errors/Error_message.php';
+    $content = ob_get_clean();
+    echo $content;
+}
+
+function myErrorHandler($errno, $errstr, $errfile, $errline) {
+
+	$getError = "Error: $errstr at File: $errfile in Line: $errline\n\n";
+
+	ob_start();
+    include Views . '/errors/Error_message.php';
+    $content = ob_get_clean();
+    echo $content;
+
+    // prevent the default error handler from executing
+    return true;
+}
+
+
+
+
 if(!function_exists('binary_encode')){
 	function binary_encode(string $contents){ #$contents =• file_get_contents(image.png or style.css => base64_encode by string)
 		return base64_encode(gzcompress($contents));
@@ -69,6 +101,12 @@ if(!function_exists("input_encode")){
 if(!function_exists('Storage')){
 	function Storage(string $load){
 		return "?load=" . $load;
+	}
+}
+
+if(!function_exists('mysql')){
+	function mysql(){
+		return (new Mahdiware\Database)->mysql;
 	}
 }
 
