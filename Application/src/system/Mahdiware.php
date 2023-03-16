@@ -13,7 +13,13 @@ class Mahdiware {
     private $action;
     private $classes;
     
-    public function __construct() {        
+    public function __construct() {
+    	error_reporting(E_ERROR | E_WARNING);
+    	ini_set('display_errors', false);
+    	set_error_handler('myErrorHandler');
+		set_exception_handler('exceptionHandler');
+		
+		
         $this->ErrorPage = new ErrorPage($this);
         $this->Routes = new Routes();
         $Router = new Router($this);
