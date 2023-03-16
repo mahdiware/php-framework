@@ -3,6 +3,7 @@ use Application\Config\Os;
 use Mahdiware\Mahdiware;
 use Mahdiware\Env;
 
+
 $minPhpVersion = '7.4';
 if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
     $message = sprintf('Your PHP version must be %s or higher to run Mahdiware. Current version: %s', $minPhpVersion, PHP_VERSION);
