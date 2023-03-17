@@ -1,4 +1,5 @@
 <?php
+
 spl_autoload_register(function ($className){
     # -------------------------------------------
     # LOAD Library
@@ -23,6 +24,5 @@ spl_autoload_register(function ($className){
     if(file_exists($Views_autoload)){
         require_once $Views_autoload;
     }
-
 });
 ?>
