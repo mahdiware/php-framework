@@ -2,39 +2,29 @@
 namespace Mahdiware;
 use Application\Config\Os;
 
-    abstract class Controller {
+    abstract class Controller{
         var $layout;
-        var $activity;
         var $View;
-        
-        public function __construct($activity) {
-            $this->activity = $activity;
-            $this->View = new View();
-        }
-
-        public function Views() {
-            return $this->View;
-        }
 		
 		public function extend($str){
-			$this->View->extend($str);
+			View::extend($str);
 		}
 		
 		public function section($content){
-			$this->View->section($content);
+			View::section($content);
 		}
 		
 		public function renderSection($content){
-			$this->View->renderSection($content);
+			View::renderSection($content);
 		}
 		
 		public function endSection(){
-			$this->View->endSection();
+			View::endSection();
 		}
 				
         public function getScript() {
             $content = "";
-            foreach ($this->View->getScript() as $jsScript) {
+            foreach (View::getScript() as $jsScript) {
                 $content .= "<script src='{$jsScript}'></script>\n\r";
             }
             return $content;
@@ -42,14 +32,13 @@ use Application\Config\Os;
         
         public function getStyle() {
             $content = "";
-            foreach ($this->View->getStyle() as $cssStyle) {
+            foreach (View::getStyle() as $cssStyle) {
                 $content .= "<link href='{$cssStyle}' rel='stylesheet'>\r\n";
             }
             return $content;
         }
 
         function view($view, $getData = []) {
-            $activity = $this->activity;
             
             foreach($getData as $name => $data)
             {
@@ -58,6 +47,6 @@ use Application\Config\Os;
             	}
             }
             include  Views . DIRECTORY_SEPARATOR . $view . ".php";
-            include Views . DIRECTORY_SEPARATOR . $this->Views()->getextend() . ".php";
+            include Views . DIRECTORY_SEPARATOR . View::getextend() . ".php";
         }
     }
