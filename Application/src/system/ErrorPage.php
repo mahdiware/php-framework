@@ -2,9 +2,6 @@
 namespace Mahdiware;
 
 class ErrorPage extends Controller {
-    public function __construct($activity) {
-        parent::__construct($activity);
-    }
 	
 	//not found
     function Error404() {
@@ -20,7 +17,6 @@ class ErrorPage extends Controller {
         $content = [
         	"title" => "Access Denied!",
         ];
-        $this->params['title'] = "Access Denied!";
         $this->view("errors/accessDenied", $content);
     }
 }
