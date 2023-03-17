@@ -43,6 +43,7 @@
 		<h1>Oops, something went wrong!</h1>
 		<p>We&#039;re sorry, but there was an error processing your request. The error message is:</p>
 		<code><?php echo $getError; ?></code>
+		<br>
 		<p>Please try again later or contact customer support if the problem persists.</p>
 	</div>
 </body>
