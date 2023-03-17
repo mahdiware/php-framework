@@ -1,21 +1,21 @@
 <?php
 namespace Mahdiware;
 
-abstract class Router {
-    var $activity;
+class Router
+{
+    protected static $Routes= [];
     
-    public function __construct($activity){
-        $this->activity = $activity;
+    public static function set($type, $name, $direction){
+    	if($name == "/") $name = "";
+        $data = [
+            'type' => strtoupper($type),
+            'name' => $name,
+            'direction' => $direction,
+        ];
+        static::$Routes[] = $data ;
     }
+    public static function get(){
     
-    function set($type, $name, $direction){
-    	if($name == "/")
-    		$name = "";
-        $this->activity->getRoutes()->set($type, $name, $direction); 
-    } 
-     
-    function get(){
-        return $this->activity->getRoutes()->get();
+        return static::$Routes;
     }
-
 }
