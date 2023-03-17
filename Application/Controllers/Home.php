@@ -6,13 +6,8 @@ use Application\Libraries\TestLib;
 
 class Home extends Controller {
 
-    public function __construct($activity) {
-        parent::__construct($activity);
-    }
-
     function Index() { 
-    	//var_dump(mysql());
-    	
+    
         $content = [
         	"title" => "Welcome To Mahdiware",
         ];
