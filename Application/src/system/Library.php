@@ -1,4 +1,7 @@
 <?php
+//namespace Mahdiware;
+//use Mahdiware;
+
 //Application Folder Path
 define('Application', PATH . DIRECTORY_SEPARATOR . "Application");
 //System Folder Path
@@ -11,7 +14,6 @@ define('Storage', PATH . DIRECTORY_SEPARATOR . "Storage");
 define('Views', Application . DIRECTORY_SEPARATOR . "Views");
 //Controller Folder Path
 define('Controller', Application . DIRECTORY_SEPARATOR . "Controllers");
-
 
 /******************-Function-******************/
 if (! function_exists('env')) {
@@ -35,47 +37,60 @@ if (! function_exists('env')) {
     }
 }
 
-function exceptionHandler($exception){
-	$errorMessage = $exception->getMessage();
-    $errorLine = $exception->getLine();
-    $errorTrace = $exception->getTraceAsString();
-    $errorCode = $exception->getCode();
-    $errorFile = $exception->getFile();
-    $errorDetails = $exception->__toString();
-    
-    $getError = "errorException: $errorMessage at File: $errorFile in Line: $errorLine\n\n";
-	ob_start();
-    include Views . '/errors/Error_message.php';
-    $content = ob_get_clean();
-    echo $content;
+$loadRoutes = Controller . "/Router.php";
+if(file_exists($loadRoutes)){
+	require_once $loadRoutes;
 }
 
-function myErrorHandler($errno, $errstr, $errfile, $errline) {
+if(!function_exists('exceptionHandler')){
+    function exceptionHandler($exception){
+    	if(!empty($exception)){	   
+    		$errorMessage = $exception->getMessage();
+            $errorLine = $exception->getLine();
+            $errorTrace = $exception->getTraceAsString();
+            $errorCode = $exception->getCode();
+            $errorFile = $exception->getFile();
+            $errorDetails = $exception->__toString();
+            
+            $getError = "errorException: $errorMessage at File: $errorFile in Line: $errorLine\n\n";
+        	ob_start();
+            include Views . '/errors/Error_message.php';
+            $content = ob_get_clean();
+            echo $content;
+    	}
+    }
+}
 
-	$getError = "Error: $errstr at File: $errfile in Line: $errline\n\n";
-
-	ob_start();
-    include Views . '/errors/Error_message.php';
-    $content = ob_get_clean();
-    echo $content;
-
-    // prevent the default error handler from executing
-    return true;
+if(!function_exists('myErrorHandler')){
+    function myErrorHandler($errno, $errstr, $errfile, $errline) {
+    	if(!empty($errno)){
+        	$getError = "Error: $errstr at File: $errfile in Line: $errline\n\n";
+        
+        	ob_start();
+            include Views . '/errors/Error_message.php';
+            $content = ob_get_clean();
+            echo $content;
+        
+            // prevent the default error handler from executing
+            return true;
+        }
+    }
 }
 
 
-
-
+//var_dump(getRouter());
 if(!function_exists('binary_encode')){
 	function binary_encode(string $contents){ #$contents =• file_get_contents(image.png or style.css => base64_encode by string)
 		return base64_encode(gzcompress($contents));
 	}
 }
+
 if(!function_exists('binary_decode')){
 	function binary_decode(string $contents){ #$contents =• file_get_contents(base64_encode by string => image.png or style.css)
 		return gzuncompress(base64_decode($contents));
 	}
 }
+
 if(!function_exists("input_encode")){
 	function input_encode($str) {
     	// Remove acentos
@@ -390,6 +405,7 @@ function remove_acentos($string) {
     $string = strtr($string, $chars);
     return $string;
 }
+
 function str_strip($str,$valid_chars){
     $out = "";
     for ($i=0;$i<mb_strlen($str);$i++){
@@ -409,6 +425,7 @@ function getBaseUrl() {
 		$url .= ':' . getServerPort() . '/';
 	return $url;
 }
+
 function isHttps() {
 	return (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false
 			|| isset($_SERVER['HTTP_X_FORWARDED_PROTOCOL']) && $_SERVER['HTTP_X_FORWARDED_PROTOCOL'] == 'https'
@@ -421,6 +438,7 @@ function isHttps() {
 			|| isset($_SERVER['HTTP_CF_VISITOR']) && preg_match('#https#i', $_SERVER['HTTP_CF_VISITOR'])
 			|| isset($_SERVER['HTTP_SSL']) && $_SERVER['HTTP_SSL']);
 }
+
 function getServerPort() {
 	$port = (isset($_SERVER['HTTP_X_FORWARDED_PORT']) && is_numeric($_SERVER['HTTP_X_FORWARDED_PORT']))
 		? intval($_SERVER['HTTP_X_FORWARDED_PORT'])
