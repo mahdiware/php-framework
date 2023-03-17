@@ -1,73 +1,68 @@
 <?php
 namespace Mahdiware;
 
-class View {
-    private $Scripts = array();
+ class View {
 
-    private $Styles = array();
-    
-
-    protected $layout;
-
-    protected $sections = [];
-
-    protected $currentSection;
-
-    protected $sectionStack = [];
+    protected static $Scripts = array();
+    protected static $Styles = array();
+    protected static $layout;
+    protected static $sections = [];
+    protected static $currentSection;
+    protected static $sectionStack = [];
     
        
-    function setScript($Script) {
-        array_push($this->Scripts, $Script);
+    public static function setScript($Script) {
+        array_push(static::$Scripts, $Script);
     }
-    function setStyle($Style) {
-        array_push($this->Styles, $Style);
-    }
-    
-    function getScript() {
-        return $this->Scripts;
-    }
-    function getStyle() {
-        return $this->Styles;
+    public static function setStyle($Style) {
+        array_push(static::$Styles, $Style);
     }
     
-    public function extend(string $layout)
+    public static function getScript() {
+        return static::$Scripts;
+    }
+    public static function getStyle() {
+        return static::$Styles;
+    }
+    
+    public static function extend(string $layout)
     {
-        $this->layout = $layout;
+        static::$layout = $layout;
     }
     
-    public function section(string $name)
+    public static function section(string $name)
     {
-        $this->currentSection = $name;
-        $this->sectionStack[] = $name;
+        static::$currentSection = $name;
+        static::$sectionStack[] = $name;
         ob_start();
     }
 	
-	public function getextend(){
-		return $this->layout;
+	public static function getextend(){
+		return static::$layout;
 	}
 	
-    public function endSection()
+    public static function endSection()
     {
         $contents = ob_get_clean();
-        if ($this->sectionStack === []) {
+        if (static::$sectionStack === []) {
             throw new RuntimeException('View themes, no current section.');
         }
-        $section = array_pop($this->sectionStack);
-        if (! array_key_exists($section, $this->sections)) {
-            $this->sections[$section] = [];
+        $section = array_pop(static::$sectionStack);
+        if (! array_key_exists($section, static::$sections)) {
+            static::$sections[$section] = [];
         }
-        $this->sections[$section][] = $contents;
+        static::$sections[$section][] = $contents;
     }
 
-    public function renderSection(string $sectionName)
+    public static function renderSection(string $sectionName)
     {
-        if (! isset($this->sections[$sectionName])) {
+        if (! isset(static::$sections[$sectionName])) {
             echo '';
             return;
         }
-        foreach ($this->sections[$sectionName] as $key => $contents) {
+        foreach (static::$sections[$sectionName] as $key => $contents) {
             echo $contents;
-            unset($this->sections[$sectionName][$key]);
+            unset(static::$sections[$sectionName][$key]);
         }
     }
 }
