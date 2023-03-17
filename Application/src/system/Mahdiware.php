@@ -2,16 +2,17 @@
 namespace Mahdiware;
 use Application\Controllers\Site;
 use Application\Controllers;
-use Application\Controllers\Routes as Router;
-use Mahdiware\Routes;
+//use Application\Controllers\Routes as Router;
+//use Mahdiware\Routes;
 
 class Mahdiware {
 	public const VERSION = '4.3';
     private $ErrorPage; //ErrorPage
-    private $Routes;
+    //private $Routes;
     private $data;
     private $action;
     private $classes;
+    
     
     public function __construct() {
     	error_reporting(E_ERROR | E_WARNING);
@@ -20,10 +21,9 @@ class Mahdiware {
 		set_exception_handler('exceptionHandler');
 		
 		
-        $this->ErrorPage = new ErrorPage($this);
-        $this->Routes = new Routes();
-        $Router = new Router($this);
+        $this->ErrorPage = new ErrorPage();
     }
+    
     //fetching ErrorPage class
     function getErrorPage() {
         return $this->ErrorPage;
@@ -36,22 +36,18 @@ class Mahdiware {
             return false;
         }
     }
-    function getRoutes(){
-        return $this->Routes;
-    }
     
     function run() {
         $array_action = [];
         $direction; $type; $_type;
-        //getting all parameter e.g: http://example.com/?load=name
+        
+        //getting all parameter e.g: http://example.com/?load=assets/css/styles.css
         $src = input_encode(filter_input(INPUT_GET, 'load'));
         
         $this->action = $this->getRequestUri();
-        if($this->action == "/"){
-        	$this->action = "";
-        }
+        if($this->action == "/") $this->action = "";
         
-        foreach($this->Routes->get() as $name => $data){
+        foreach(Router::get() as $name => $data){
         	$array_action[] = $data["name"];
             
             if($this->action == $data["name"]){
@@ -65,6 +61,7 @@ class Mahdiware {
         }else{
         	$_type = "GET";
         }
+        
         //in Storage Folder
         if(empty($src)){
 			if(in_array($this->action, $array_action) && ($_type == $type || $type == "BOTH") && empty($src)){
@@ -88,7 +85,7 @@ class Mahdiware {
             }
         }else{
         	if(is_file(Storage . DIRECTORY_SEPARATOR . $src) && (!contains(".php", $src) && !contains(".htaccess", $src))){
-        		$_source = array_pop(explode("/", $src));
+        		$_source = explode("/", $src)[count(explode("/", $src))-1];
         		
         		$extension = strtolower(pathinfo($_source, PATHINFO_EXTENSION));
         		
