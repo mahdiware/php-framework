@@ -2,13 +2,10 @@
 namespace Mahdiware;
 use Application\Controllers\Site;
 use Application\Controllers;
-//use Application\Controllers\Routes as Router;
-//use Mahdiware\Routes;
 
 class Mahdiware {
 	public const VERSION = '4.3';
     private $ErrorPage; //ErrorPage
-    //private $Routes;
     private $data;
     private $action;
     private $classes;
@@ -19,7 +16,6 @@ class Mahdiware {
     	ini_set('display_errors', false);
     	set_error_handler('myErrorHandler');
 		set_exception_handler('exceptionHandler');
-		
 		
         $this->ErrorPage = new ErrorPage();
     }
@@ -84,11 +80,10 @@ class Mahdiware {
                  $this->ErrorPage->Error404();
             }
         }else{
-        	if(is_file(Storage . DIRECTORY_SEPARATOR . $src) && (!contains(".php", $src) && !contains(".htaccess", $src))){
-        		$_source = explode("/", $src)[count(explode("/", $src))-1];
-        		
-        		$extension = strtolower(pathinfo($_source, PATHINFO_EXTENSION));
-        		
+        	$_source = explode("/", $src)[count(explode("/", $src))-1]; //removing "/" and taking file name e.g: 'assets/css/style.css' TO 'style.css'
+        	$extension = strtolower(pathinfo($_source, PATHINFO_EXTENSION)); //taking extension eg: 'style.css' TO 'css'
+        	
+        	if(is_file(Storage . DIRECTORY_SEPARATOR . $src) && contains(["php", "htaccess", "env", "html", "xhtml", "phps", "phtml", "php3", "php4"], $extension) !== "false"){
             	foreach(Extension() as $name => $content){
             		if($extension == $name){
             			header("Content-Type: " . $content);
@@ -96,9 +91,10 @@ class Mahdiware {
             	}
             	header("Content-Disposition: inline; filename=\"".basename($_source)."\"");
         		
-        		//header("Content-Disposition: inline; filename=\"".basename($_source)."\"");
-        		$encode = binary_encode(file_get_contents(Storage . DIRECTORY_SEPARATOR . $src));
-        		echo binary_decode($encode);
+        		//$encode = binary_encode(file_get_contents(Storage . DIRECTORY_SEPARATOR . $src));
+        		//echo binary_decode($encode);
+        		
+        		echo file_get_contents(Storage . DIRECTORY_SEPARATOR . $src);
         	}else{
         		$this->ErrorPage->AccessDenied();
         	}
