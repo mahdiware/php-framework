@@ -12,10 +12,10 @@ All page names are managing in `Application/Controllers/Routes.php` and then for
 Router::set("BOTH","a/b/c","Home::Index");
 ```
 On the front we see three items <br>
-1. BOTH -> Here the status of the page is written such as GET, POST and BOTH
-		* where it is GET:- you can see the data of this page for all requests, except for POST <br>
-    	* when it is POST:- you can see this page only POST request<br>
-    	* when it is BOTH:- you can see only the requests<br>
+1. BOTH -> Here the status of the page is written such as GET, POST and BOTH<br>
+	* where it is GET:- you can see the data of this page for all requests, except for POST <br>
+    * when it is POST:- you can see this page only POST request<br>
+    * when it is BOTH:- you can see only the requests<br>
 2. a/b/c -> is name of the page, the  The client will not write the .php at the end because it is unnecessary <br><br>
 3. Home::Index -> where home is run from the class in the `Application/Controllers/Home.php` folder and also Index is a function in the Home 
 <br><br>
