@@ -301,7 +301,17 @@ function replace_double($sub,$str){
 }
 
 function contains($search, $data){
-        return strpos($data, $search) !== false;
+		if(is_array($search)){
+			foreach($search as $name => $second){
+				if($second == $data){
+					//echo $second;
+					return "false";
+				}
+				//return strpos($data, $search[$name]) !== false;
+			}
+		}else if(is_string($search)){
+			return strpos($data, $search) !== false;
+		}
 }
 
 function remove_acentos($string) {
