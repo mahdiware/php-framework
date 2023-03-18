@@ -6,10 +6,6 @@ use Application\Libraries\TestLib;
 
 class Example extends Controller {
 
-    public function __construct($activity) {
-        parent::__construct($activity);
-    }
-
     function Index() {           
         $content = [
         	"title" => "Welcome To Mahdiware",
