@@ -64,7 +64,7 @@ class Mahdiware {
                 
                 if (is_file(Controller . DIRECTORY_SEPARATOR . ucfirst($direction[0]) . '.php')) {
                     $controllerName = "Application\\Controllers\\" . $direction[0];
-                    $activeController = new $controllerName($this);
+                    $activeController = new $controllerName();
                     $actionName = $direction[1];
                     if ($actionName != "") {
                         if (method_exists($activeController, ucfirst($actionName))) {
