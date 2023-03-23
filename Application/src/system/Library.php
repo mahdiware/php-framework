@@ -93,6 +93,7 @@ if(!function_exists('binary_decode')){
 
 if(!function_exists("input_encode")){
 	function input_encode($str) {
+		$str = (string) $str;
     	// Remove acentos
     	$str = remove_acentos($str);
         // Substitui caracteres reservados
@@ -315,7 +316,7 @@ function contains($search, $data){
 }
 
 function remove_acentos($string) {
-    if ( !preg_match('/[\x80-\xff]/', $string) ) return $string;
+    if ( !preg_match('/[\x80-\xff]/', (string) $string) ) return $string;
     $chars = array(
     // Decompositions for Latin-1 Supplement
     chr(195).chr(128) => 'A', chr(195).chr(129) => 'A',
