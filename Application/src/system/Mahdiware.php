@@ -89,8 +89,7 @@ class Mahdiware {
             			header("Content-Type: " . $content);
             		}
             	}
-            	header("Content-Disposition: inline; filename=\"".basename($_source)."\"");
-        		
+            	
         		//$encode = binary_encode(file_get_contents(Storage . DIRECTORY_SEPARATOR . $src));
         		//echo binary_decode($encode);
         		
