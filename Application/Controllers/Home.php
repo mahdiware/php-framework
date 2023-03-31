@@ -10,18 +10,18 @@ class Home extends Controller {
     function Index() { 
     	
     	// Create a new session instance
-    	$Session = new Session();
+    	
 
     	// Check if the session variable "visited" is null
-    	if($Session->get("visited") == null){
-    		$Session->set("visited", 1); // If so, set it to 1
+    	if(Session::get("visited") == null){
+    		Session::set("visited", 1); // If so, set it to 1
     	}else{
-    		$Session->set("visited", 1+($Session->get("visited"))); // If not, increment the value of "visited"
+    		Session::set("visited", 1+(Session::get("visited"))); // If not, increment the value of "visited"
     	}
 
         $content = [
         	"title" => "Welcome To Mahdiware",
-        	"visited" => $Session->get("visited"),
+        	"visited" => Session::get("visited"),
         ];
         $this->view("index", $content);
         

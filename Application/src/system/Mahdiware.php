@@ -18,6 +18,7 @@ class Mahdiware {
 		set_exception_handler('exceptionHandler');
 		
         $this->ErrorPage = new ErrorPage();
+        $Session = new Session();
     }
     
     //fetching ErrorPage class

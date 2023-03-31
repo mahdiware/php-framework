@@ -8,55 +8,55 @@ namespace Mahdiware;
 class Session {
 
     // Session data array
-    private $sessionData = array();
+    protected static $sessionData = array();
 
     // Session ID
-    private $sessionID;
+    protected static $sessionID;
 
     // Session directory
-    private $sessionDir;
+    protected static $sessionDir;
 
     // Session timeout (in seconds)
-    private $sessionTimeout = 1800; // 30 minutes
+    protected static $sessionTimeout = 1800; // 30 minutes
 
     // Constructor
     public function __construct() {
         // Set session directory
-        $this->sessionDir = writable . '/sessions';
-        if (!is_dir($this->sessionDir)) {
-            mkdir($this->sessionDir);
+        static::$sessionDir = writable . '/sessions';
+        if (!is_dir(static::$sessionDir)) {
+            mkdir(static::$sessionDir);
         }
         // Start session
-        $this->start();
+        static::start();
     }
 
     // Start session
     private function start() {
         // Get session ID from request cookies or generate a new one
         if (isset($_COOKIE['session_id'])) {
-            $this->sessionID = $_COOKIE['session_id'];
+            static::$sessionID = $_COOKIE['session_id'];
         } else {
-            $this->sessionID = $this->generateSessionID();
-            setcookie('session_id', $this->sessionID, 0, '/');
+            static::$sessionID = static::generateSessionID();
+            setcookie('session_id', static::$sessionID, 0, '/');
         }
         // Check if session file exists
-        $sessionFile = $this->sessionDir . '/' . $this->sessionID;
+        $sessionFile = static::$sessionDir . '/' . static::$sessionID;
         if (file_exists($sessionFile)) {
             // Load session data from file
             $data = file_get_contents($sessionFile);
-            $this->sessionData = unserialize($data);
+            static::$sessionData = unserialize($data);
         } else {
             // Create new session
-            $this->sessionData = array();
-            $this->sessionData['session_start_time'] = time();
+            static::$sessionData = array();
+            static::$sessionData['session_start_time'] = time();
         }
         // Check if session has timed out
-        if (time() - $this->sessionData['session_start_time'] > $this->sessionTimeout) {
+        if (time() - static::$sessionData['session_start_time'] > static::$sessionTimeout) {
             // Destroy session and start a new one
-            $this->destroy();
-            $this->sessionID = $this->generateSessionID();
-            setcookie('session_id', $this->sessionID, 0, '/');
-            $this->start();
+            static::destroy();
+            static::$sessionID = static::generateSessionID();
+            setcookie('session_id', static::$sessionID, 0, '/');
+            static::start();
         }
     }
 
@@ -66,37 +66,38 @@ class Session {
     }
 
     // Destroy session
-    public function destroy() {
-        $sessionFile = $this->sessionDir . '/' . $this->sessionID;
+    public static function destroy() {
+        $sessionFile = static::$sessionDir . '/' . static::$sessionID;
         if (file_exists($sessionFile)) {
             unlink($sessionFile);
         }
-        $this->sessionData = array();
-        $this->sessionID = null;
+        static::$sessionData = array();
+        static::$sessionID = null;
         setcookie('session_id', '', time() - 3600, '/');
     }
 
     // Set session variable
-    public function set($key, $value) {
-        $this->sessionData[$key] = $value;
-        $this->save();
+    public static function set($key, $value) {
+        static::$sessionData[$key] = $value;
+        static::save();
     }
 
     // Get session variable
-    public function get($key) {
-        return isset($this->sessionData[$key]) ? $this->sessionData[$key] : null;
+    public static function get($key) {
+        return isset(static::$sessionData[$key]) ? static::$sessionData[$key] : null;
     }
 
     // Remove session variable
-    public function unset($key) {
-        unset($this->sessionData[$key]);
-        $this->save();
+    public static function unsetKey($key) {
+        unset(static::$sessionData[$key]);
+        static::save();
     }
 
     // Save session data to file
-    private function save() {
-        $sessionFile = $this->sessionDir . '/' . $this->sessionID;
-        $data = serialize($this->sessionData);
+    private static function save() {
+        $sessionFile = static::$sessionDir . '/' . static::$sessionID;
+        $data = serialize(static::$sessionData);
+        
         file_put_contents($sessionFile, $data);
     }
 
