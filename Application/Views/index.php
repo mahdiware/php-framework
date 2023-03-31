@@ -27,11 +27,13 @@
     	<p>The corresponding controller for this page can be found at:</p>
     	<pre><code>Application/Controllers/Home.php</code></pre>
 	</section>
-</main>
+	<br>
+	</main>
 
 <footer>
 	<div class="center-block" style="padding: 15px">
-    	<a class="text-muted" href="<?= env('chat.telegram') ?>">&copy; <?= env('developer.name') ?> Team 2022 - <?= date('Y') ?></a>
+		<p>visited this page <?= $visited ?> times 
+    	<a class="text-muted" href="<?= env('chat.telegram') ?>">&copy; <?= env('developer.name') ?> Team 2022 - <?= date('Y') ?></a> </p>
 	</div>
 </footer>
 <?= $this->endSection() ?>
