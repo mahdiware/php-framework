@@ -16,6 +16,7 @@
     	<div class="heroe">
         	<h1>Welcome to <?= env('developer.name') ?> <?= Mahdiware\Mahdiware::VERSION ?></h1>
         	<h2>The small framework with powerful features</h2>
+        	<h3>Visited this page <?= $visited ?> times </h3>
     	</div>
 	</header>
 
@@ -32,8 +33,8 @@
 
 <footer>
 	<div class="center-block" style="padding: 15px">
-		<p>visited this page <?= $visited ?> times 
-    	<a class="text-muted" href="<?= env('chat.telegram') ?>">&copy; <?= env('developer.name') ?> Team 2022 - <?= date('Y') ?></a> </p>
+		 
+    	<a class="text-muted" href="<?= env('chat.telegram') ?>">&copy; <?= env('developer.name') ?> Team 2022 - <?= date('Y') ?></a>
 	</div>
 </footer>
 <?= $this->endSection() ?>
