@@ -18,7 +18,7 @@ class Mahdiware {
 		set_exception_handler('exceptionHandler');
 		
         $this->ErrorPage = new ErrorPage();
-        $Session = new Session();
+        $Session = new Session(); //don't remove this, we just want to run the __construct() in Session 
     }
     
     //fetching ErrorPage class
