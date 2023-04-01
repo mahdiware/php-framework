@@ -8,9 +8,6 @@ use Application\Libraries\TestLib;
 class Home extends Controller {
 
     function Index() { 
-    	
-    	// Create a new session instance
-    	
 
     	// Check if the session variable "visited" is null
     	if(Session::get("visited") == null){
